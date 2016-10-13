@@ -24,7 +24,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
                 SomeProperty = VALUE
             };
 
-            var guardedValue = Guard.That(thingy).IsNotNull().Value;
+            var guardedValue = Guard.That(thingy).IsNotNull("I shouldn't be seen").Value;
             guardedValue.Should().NotBeNull();
             guardedValue.Should().BeAssignableTo<object>();
 
