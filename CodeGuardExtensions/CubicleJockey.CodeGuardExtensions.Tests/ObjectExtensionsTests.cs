@@ -13,6 +13,63 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
     [TestClass]
     public class ObjectExtensionsTests
     {
+        #region IsNull
+
+        [TestMethod]
+        public void IsNull_Valid()
+        {
+            object thingy = null;
+
+            var guardedValue = Guard.That(thingy).IsNull("I shouldn't be seen").Value;
+            guardedValue.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void IsNull_Fail()
+        {
+            const string VALUE = "TheValue";
+            object thingy = new
+            {
+                SomeProperty = VALUE
+            };
+            Action check =
+                () => Guard.That(thingy).IsNull("I'm Custom");
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage("I'm Custom");
+        }
+
+        [TestMethod]
+        public void IsNull_CustomMessageIsNull()
+        {
+            object thingy = null;
+            Action check =
+                () => Guard.That(thingy).IsNull(null);
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+        }
+
+        [TestMethod]
+        public void IsNull_CustomMessageIsEmptyString()
+        {
+            object thingy = null;
+            Action check =
+                () => Guard.That(thingy).IsNull(string.Empty);
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+        }
+
+        [TestMethod]
+        public void IsNull_CustomMessageIsWhitespace()
+        {
+            object thingy = null;
+            Action check =
+                () => Guard.That(thingy).IsNull("    ");
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+        }
+
+        #endregion IsNull
+
         #region IsNotNull
 
         [TestMethod]

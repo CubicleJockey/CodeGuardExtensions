@@ -1,11 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
 {
     public static class ObjectExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static IArg<T> IsNull<T>(this IArg<T> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNull));
+            try
+            {
+                if (arg.Value != null)
+                {
+                    throw new ArgumentException();
+                }
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        } 
+
         /// <summary>
         /// Extension method to IsNotNull and allows a custom message
         /// </summary>
