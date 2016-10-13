@@ -131,6 +131,90 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
         #endregion IsEmpty
 
+        #region IsNotEmpty
 
+        [TestMethod]
+        public void IsNotEmpty()
+        {
+            IList<float> list = new[] { 2f, 5f, 8f };
+
+            var result = Guard.That(list).IsNotEmpty().Value;
+
+            result.Should().NotBeNull();
+            result.Should().NotBeEmpty();
+        }
+
+        [TestMethod]
+        public void IsNotEmpty_Failed()
+        {
+            IList<float> list = new float[0];
+
+            Action check = () => Guard.That(list).IsNotEmpty();
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("IList<Single> should be empty.");
+        }
+
+        #endregion IsNotEmpty
+
+        #region IsNotEmptyCustomMessage
+
+        [TestMethod]
+        public void IsNotEmptyCustomMessage()
+        {
+            IList<int> list = new [] { 1, 2, 3 };
+            var result = Guard.That(list).IsNotEmpty("You shouldn't see me").Value;
+
+            result.Should().NotBeNull();
+            result.Should().NotBeEmpty();
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomMessage_Failed()
+        {
+            const string CUSTOMMESSAGE = "Eldritch";
+            IList<int> list = new int[0];
+
+            Action check = () => Guard.That(list).IsNotEmpty(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomeMessageIsNull()
+        {
+            IList<int> list = new int[0];
+
+            Action check = () => Guard.That(list).IsNotEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomeMessageIsEmptyString()
+        {
+            IList<int> list = new int[0];
+
+            Action check = () => Guard.That(list).IsNotEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomeMessageIsWhitespace()
+        {
+            IList<int> list = new int[0];
+
+            Action check = () => Guard.That(list).IsNotEmpty("    ");
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+
+        #endregion IsNotEmptyCustomMessage
     }
 }

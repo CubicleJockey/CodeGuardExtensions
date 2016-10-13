@@ -8,6 +8,19 @@ namespace CubicleJockey.CodeGuardExtensions
 {
     public static class IListExtensions
     {
+        public static IArg<IList<T>> IsNotEmpty<T>(this IArg<IList<T>> arg)
+        {
+            try
+            {
+                Guard.That(arg.Value.AsEnumerable()).IsNotEmpty();
+            }
+            catch (Exception)
+            {
+                arg.Message.Set($"IList<{typeof(T).Name}> should be empty.");
+            }
+            return arg;
+        } 
+
         /// <summary>
         /// Extension method to IsNotEmpty which allows a custom message
         /// </summary>
