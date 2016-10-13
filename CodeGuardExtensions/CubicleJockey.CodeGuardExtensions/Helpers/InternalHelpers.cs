@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CubicleJockey.CodeGuardExtensions
+namespace CubicleJockey.CodeGuardExtensions.Helpers
 {
     internal static class InternalHelpers
     {

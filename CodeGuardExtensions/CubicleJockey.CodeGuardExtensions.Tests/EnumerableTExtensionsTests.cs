@@ -10,6 +10,92 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
     [TestClass]
     public class EnumerableTExtensionsTests : BaseTest
     {
+        #region IEnumerable<T> IsEmpty
+
+        [TestMethod]
+        public void IsEmpty()
+        {
+            IEnumerable<float> list = new List<float>(0);
+
+            var result = Guard.That(list).IsEmpty().Value;
+
+            result.Should().NotBeNull();
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void IsEmpty_Fail()
+        {
+            IEnumerable<float> list = new List<float>(1) { 14.5f };
+
+            Action check = () => Guard.That(list).IsEmpty();
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("IEnumberable<T> should be empty.");
+        }
+
+        #endregion IEnumerable<T> IsEmpty
+
+        #region IEnumerable<T> IsEmptyCustomMessage
+
+        [TestMethod]
+        public void IsEmptyCustomMessage()
+        {
+            IEnumerable<float> list = new List<float>(0);
+
+            var result = Guard.That(list).IsEmpty("I shouldn't come up.").Value;
+
+            result.Should().NotBeNull();
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void IsEmptyCustomMessage_Fail()
+        {
+            const string CUSTOMEMESSAGE = "Your stuff is aslpoding!";
+            IEnumerable<float> list = new List<float>(1) { 43.5f };
+
+            Action check = () => Guard.That(list).IsEmpty(CUSTOMEMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMEMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsEmptyCustomeMessageIsNull()
+        {
+            IEnumerable<float> list = new List<float>(1) { 43.5f };
+
+            Action check = () => Guard.That(list).IsEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
+        }
+
+        [TestMethod]
+        public void IsEmptyCustomeMessageIsEmptyString()
+        {
+            IEnumerable<float> list = new List<float>(1) { 43.5f };
+
+            Action check = () => Guard.That(list).IsEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
+        }
+
+        [TestMethod]
+        public void IsEmptyCustomeMessageIsWhitespace()
+        {
+            IEnumerable<float> list = new List<float>(1) { 43.5f };
+
+            Action check = () => Guard.That(list).IsEmpty("   ");
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
+        }
+
+        #endregion IEnumerable<T> IsEmptyCustomMessage
+
         #region IEnumerable<T> IsNotEmpty
 
         [TestMethod]

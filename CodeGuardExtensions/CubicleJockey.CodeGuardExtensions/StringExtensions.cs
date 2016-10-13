@@ -1,4 +1,5 @@
 ﻿using System;
+using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions

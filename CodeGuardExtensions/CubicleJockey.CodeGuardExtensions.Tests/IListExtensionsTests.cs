@@ -48,7 +48,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =() => Guard.That(items).IsNotEmpty(null);
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check = () => Guard.That(items).IsNotEmpty(string.Empty);
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check = () => Guard.That(items).IsNotEmpty("   ");
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         #endregion IList IsNotEmpty
@@ -107,6 +107,30 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
         }
 
+        [TestMethod]
+        public void IList_CustomMessageIsEmptyString()
+        {
+            IList<double> list = new List<double>(0);
+
+            Action check = () => Guard.That(list).IsEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
+        }
+
+        [TestMethod]
+        public void IList_CustomMessageIsWhitespace()
+        {
+            IList<double> list = new List<double>(0);
+
+            Action check = () => Guard.That(list).IsEmpty("    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
+        }
+
         #endregion IsEmpty
+
+
     }
 }

@@ -46,8 +46,8 @@
   <ItemGroup>
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="EnumerableTExtensions.cs" />
+    <Compile Include="Helpers\InternalHelpers.cs" />
     <Compile Include="IListExtensions.cs" />
-    <Compile Include="InternalHelpers.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

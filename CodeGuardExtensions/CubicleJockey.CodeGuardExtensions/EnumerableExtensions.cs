@@ -1,10 +1,39 @@
 ﻿using System;
+using System.Linq;
+using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
 {
     public static class EnumerableExtensions
     {
+        public static IArg<T[]> IsEmpty<T>(this IArg<T[]> arg)
+        {
+            try
+            {
+                Guard.That(arg.Value.AsEnumerable()).IsEmpty();
+            }
+            catch (Exception)
+            {
+                arg.Message.Set($"{typeof(T).Name}[] should not be empty.");
+            }
+            return arg;
+        }
+
+        public static IArg<T[]> IsEmpty<T>(this IArg<T[]> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsEmpty));
+            try
+            {
+                Guard.That(arg.Value.AsEnumerable()).IsEmpty();
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
         /// <summary>
         /// Extension method to IsNotEmpty which allows a custom message
         /// </summary>

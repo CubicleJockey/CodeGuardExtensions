@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
@@ -17,14 +19,30 @@ namespace CubicleJockey.CodeGuardExtensions
             InternalHelpers.IsCustomMessageValid(message, nameof(IsNotEmpty));
             try
             {
-                if (arg.Value == null || arg.Value.Count == 0)
-                {
-                    throw new ArgumentException();
-                }
+                Guard.That(arg.Value.AsEnumerable()).IsNotEmpty();
             }
             catch (Exception)
             {
                 arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// IsEmpty is missing from Code Guard
+        /// </summary>
+        /// <typeparam name="T">IListT </typeparam>
+        /// <param name="arg">Self</param>
+        /// <returns>Self</returns>
+        public static IArg<IList<T>> IsEmpty<T>(this IArg<IList<T>> arg)
+        {
+            try
+            {
+                Guard.That(arg.Value.AsEnumerable()).IsEmpty();
+            }
+            catch (Exception)
+            {
+                arg.Message.Set("IList contains items when it should not.");
             }
             return arg;
         }
@@ -40,10 +58,7 @@ namespace CubicleJockey.CodeGuardExtensions
             InternalHelpers.IsCustomMessageValid(message, nameof(IsEmpty));
             try
             {
-                if (arg.Value.Count != 0)
-                {
-                    throw new ArgumentException();
-                }
+                Guard.That(arg.Value.AsEnumerable()).IsEmpty();
             }
             catch (Exception)
             {
