@@ -8,7 +8,7 @@ using CubicleJockey.CodeGuardExtensions;
 namespace CubicleJockey.CodeGuardExtentions.Tests
 {
     [TestClass]
-    public class IListExtensionsTests
+    public class IListExtensionsTests : BaseTest
     {
         #region IList IsNotEmpty
 
@@ -23,60 +23,52 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         public void IListIsNotEmpty_IListIsNull()
         {
             const string CUSTOMMESSAGE = "Custom Message";
+            IList<string> items = null;
+            Action check = () => Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
 
-            try
-            {
-                IList<string> items = null;
-                Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected an exception");
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
         public void IListIsNotEmpty_IListIsEmpty()
         {
             const string CUSTOMMESSAGE = "Custom Message";
+            IList<string> items = new List<string>(0);
+            Action check = () => Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
 
-            try
-            {
-                IList<string> items = new List<string>(0);
-                Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected an exception");
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IListIsNotEmpty_CustomMessageIsNull()
         {
             IList<string> items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty(null);
+            Action check =() => Guard.That(items).IsNotEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IListIsNotEmpty_CustomMessageIsEmptyString()
         {
             IList<string> items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty(string.Empty);
+            Action check = () => Guard.That(items).IsNotEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IListIsNotEmpty_CustomMessageIsWhitespace()
         {
             IList<string> items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty("      ");
+            Action check = () => Guard.That(items).IsNotEmpty("   ");
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.");
         }
 
         #endregion IList IsNotEmpty
@@ -105,9 +97,14 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         [TestMethod]
-        public void IListCustomMessageIsNull()
+        public void IList_CustomMessageIsNull()
         {
-            
+            IList<double> list = new List<double>(0);
+
+            Action check = () => Guard.That(list).IsEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEmpty"));
         }
 
         #endregion IsEmpty

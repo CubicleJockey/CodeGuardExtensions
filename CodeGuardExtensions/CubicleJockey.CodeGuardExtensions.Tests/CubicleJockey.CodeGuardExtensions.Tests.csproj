@@ -68,6 +68,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseTest.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="EnumerableTExtensionsTests.cs" />
     <Compile Include="IListExtensionsTests.cs" />

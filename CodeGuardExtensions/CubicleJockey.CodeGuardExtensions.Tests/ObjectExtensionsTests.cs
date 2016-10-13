@@ -11,7 +11,7 @@ using Seterlund.CodeGuard;
 namespace CubicleJockey.CodeGuardExtentions.Tests
 {
     [TestClass]
-    public class ObjectExtensionsTests
+    public class ObjectExtensionsTests : BaseTest
     {
         #region IsNull
 
@@ -45,7 +45,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNull(null);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNull"));
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNull(string.Empty);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNull"));
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNull("    ");
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNull"));
         }
 
         #endregion IsNull
@@ -112,7 +112,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNotNull(null);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNull"));
         }
 
         [TestMethod]
@@ -122,7 +122,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNotNull(string.Empty);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNull"));
         }
 
         [TestMethod]
@@ -132,7 +132,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check =
                 () => Guard.That(thingy).IsNotNull("    ");
             check.ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNull extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNull"));
         }
 
         #endregion IsNotNull
@@ -171,7 +171,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = 15;
             Action guard = () => Guard.That(number).IsNotDefault(null);
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotDefault"));
         }
 
         [TestMethod]
@@ -180,7 +180,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = 15;
             Action guard = () => Guard.That(number).IsNotDefault(string.Empty);
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotDefault"));
         }
 
         [TestMethod]
@@ -189,7 +189,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = 15;
             Action guard = () => Guard.That(number).IsNotDefault("    ");
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotDefault"));
         }
 
         #endregion IsNotDefault
@@ -228,7 +228,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = default(int);
             Action guard = () => Guard.That(number).IsDefault(null);
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsDefault"));
         }
 
         [TestMethod]
@@ -237,7 +237,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = default(int);
             Action guard = () => Guard.That(number).IsDefault(string.Empty);
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsDefault"));
         }
 
         [TestMethod]
@@ -246,7 +246,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const int number = default(int);
             Action guard = () => Guard.That(number).IsDefault("    ");
             guard.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsDefault extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsDefault"));
         }
 
 
@@ -299,7 +299,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNullOrDefault"));
         }
 
         [TestMethod]
@@ -312,7 +312,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNullOrDefault"));
         }
 
         [TestMethod]
@@ -325,7 +325,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNullOrDefault"));
         }
 
         #endregion IsNullOrDefault
@@ -364,7 +364,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrDefault"));
         }
 
         [TestMethod]
@@ -377,7 +377,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrDefault"));
         }
 
         [TestMethod]
@@ -390,11 +390,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             nullResult
                 .ShouldThrow<ArgumentException>()
-                .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrDefault extension.");
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrDefault"));
         }
-
-
-
         #endregion IsNotNullOrDefault
     }
 }

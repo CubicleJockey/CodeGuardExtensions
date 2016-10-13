@@ -7,7 +7,7 @@ using Seterlund.CodeGuard;
 namespace CubicleJockey.CodeGuardExtentions.Tests
 {
     [TestClass]
-    public class StringExtensionsTests
+    public class StringExtensionsTests : BaseTest
     {
         #region IsNotNullOrWhiteSpace
 
@@ -56,7 +56,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrWhiteSpace"));
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrWhiteSpace"));
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
 
             check.ShouldThrow<ArgumentException>()
-                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
+                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrWhiteSpace"));
         }
 
         [TestMethod]

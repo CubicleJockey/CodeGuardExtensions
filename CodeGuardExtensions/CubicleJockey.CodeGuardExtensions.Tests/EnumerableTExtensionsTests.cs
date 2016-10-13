@@ -8,10 +8,8 @@ using Seterlund.CodeGuard;
 namespace CubicleJockey.CodeGuardExtentions.Tests
 {
     [TestClass]
-    public class EnumerableTExtensionsTests
+    public class EnumerableTExtensionsTests : BaseTest
     {
-        private const string CUSTOMMESSAGE_ERROR = "Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension.";
-
         #region IEnumerable<T> IsNotEmpty
 
         [TestMethod]
@@ -53,7 +51,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             Action check = () => Guard.That(items).IsNotEmpty(null);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage(CUSTOMMESSAGE_ERROR);
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         [TestMethod]
@@ -63,7 +61,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
 
             Action check = () => Guard.That(items).IsNotEmpty(string.Empty);
             check.ShouldThrow<ArgumentException>()
-                .WithMessage(CUSTOMMESSAGE_ERROR);
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         [TestMethod]
@@ -72,7 +70,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             IEnumerable<string> items = new[] { "A", "B" };
             Action check = () => Guard.That(items).IsNotEmpty("     ");
             check.ShouldThrow<ArgumentException>()
-                .WithMessage(CUSTOMMESSAGE_ERROR);
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
         }
 
         #endregion IEnumerable<T> IsNotEmpty

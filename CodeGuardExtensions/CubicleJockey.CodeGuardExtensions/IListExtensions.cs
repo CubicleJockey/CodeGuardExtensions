@@ -37,7 +37,7 @@ namespace CubicleJockey.CodeGuardExtensions
         /// <returns>Self</returns>
         public static IArg<IList<T>> IsEmpty<T>(this IArg<IList<T>> arg, string message)
         {
-            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotEmpty));
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsEmpty));
             try
             {
                 if (arg.Value.Count != 0)
