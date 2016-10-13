@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubicleJockey.CodeGuardExte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubicleJockey.CodeGuardExtensions.Tests", "CubicleJockey.CodeGuardExtensions.Tests\CubicleJockey.CodeGuardExtensions.Tests.csproj", "{952D4214-6998-4A89-8191-2B93FF872E81}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93BB3984-9FD3-43AC-8029-C857E2B35CB3}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
