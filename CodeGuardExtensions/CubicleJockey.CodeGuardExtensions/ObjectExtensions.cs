@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
@@ -6,7 +7,7 @@ namespace CubicleJockey.CodeGuardExtensions
     public static class ObjectExtensions
     {
         /// <summary>
-        /// Extension method to IsNotNull which allows a custom message
+        /// Extension method to IsNotNull and allows a custom message
         /// </summary>
         /// <param name="arg">Self</param>
         /// <param name="message">The Custom Message</param>
@@ -28,21 +29,86 @@ namespace CubicleJockey.CodeGuardExtensions
             return arg;
         }
 
-        //public static IArg<T> IsNotNullOrDefault<T>(this IArg<T> arg, string message)
-        //{
-        //    InternalHelpers.IsCustomMessageValid(message, nameof(IsNotNull));
-        //    try
-        //    {
-        //        if (arg.Value == null || arg.Value == default(T))
-        //        {
-        //            throw new ArgumentNullException();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        arg.Message.Set(message);
-        //    }
-        //    return arg;
-        //}
+        /// <summary>
+        /// Extension method to IsNotDefault and allows a custom message.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static IArg<T> IsNotDefault<T>(this IArg<T> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotDefault));
+            try
+            {
+                if(InternalHelpers.IsDefault(arg.Value))
+                {
+                    throw new ArgumentException();
+                }
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to IsNotDefault and allows a custom message.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static IArg<T> IsDefault<T>(this IArg<T> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsDefault));
+            try
+            {
+                if (!InternalHelpers.IsDefault(arg.Value))
+                {
+                    throw new ArgumentException();
+                }
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        public static IArg<T> IsNotNullOrDefault<T>(this IArg<T> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotNullOrDefault));
+            try
+            {
+                if (arg.Value == null || InternalHelpers.IsDefault(arg.Value))
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        public static IArg<T> IsNullOrDefault<T>(this IArg<T> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNullOrDefault));
+            try
+            {
+                if (arg.Value != null || !InternalHelpers.IsDefault(arg.Value))
+                {
+                    throw new ArgumentNullException();
+                }
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
     }
 }
