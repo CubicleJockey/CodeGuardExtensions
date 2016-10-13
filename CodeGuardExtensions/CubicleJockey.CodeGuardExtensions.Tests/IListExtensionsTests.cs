@@ -80,5 +80,36 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         #endregion IList IsNotEmpty
+
+        #region IsEmpty
+
+        [TestMethod]
+        public void IListIsEmpty()
+        {
+            IList<char> list = new char[0];
+            var result = Guard.That(list).IsEmpty("You shouldn't see me").Value;
+
+            result.Should().NotBeNull();
+            result.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void IListIsEmpty_Fail()
+        {
+            const string MESSAGE = "Da Message";
+            IList<char> list = new [] {'A', 'B', 'C'};
+            Action check = () => Guard.That(list).IsEmpty(MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void IListCustomMessageIsNull()
+        {
+            
+        }
+
+        #endregion IsEmpty
     }
 }

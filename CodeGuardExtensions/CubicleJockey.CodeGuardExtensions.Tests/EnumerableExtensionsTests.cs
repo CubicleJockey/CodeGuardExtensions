@@ -9,6 +9,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
     [TestClass]
     public class EnumerableExtensionsTests
     {
+        private const string CUSTOMMESSAGE_ERROR = "Cannot pass Null, Empty or Whitespace as customMessage for IsNotEmpty extension."; 
+
         #region IEnumerable IsNotEmpty
 
         [TestMethod]
@@ -19,63 +21,57 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         [TestMethod]
-        public void EnumerableIsNotEmpty_IListIsNull()
+        public void EnumerableIsNotEmpty_EnumerableIsNull()
         {
             const string CUSTOMMESSAGE = "Custom Message";
+            string[] items = null;
 
-            try
-            {
-                string[] items = null;
-                Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected an exception");
+            Action check = () => Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
-        public void EnumerableIsNotEmpty_IListIsEmpty()
+        public void EnumerableIsNotEmpty_EnumerableIsEmpty()
         {
             const string CUSTOMMESSAGE = "Custom Message";
 
-            try
-            {
-                var items = new string[0];
-                Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected an exception");
+            var items = new string[0];
+            Action check = () => Guard.That(items).IsNotEmpty(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void EnumerableIsNotEmpty_CustomMessageIsNull()
         {
             var items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty(null);
+            Action check = () => Guard.That(items).IsNotEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE_ERROR);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void EnumerableIsNotEmpty_CustomMessageIsEmptyString()
         {
             var items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty(string.Empty);
+            Action check = () => Guard.That(items).IsNotEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE_ERROR);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void EnumerableIsNotEmpty_CustomMessageIsWhitespace()
         {
             var items = new[] { "A", "B" };
-            Guard.That(items).IsNotEmpty("      ");
+            Action check = () => Guard.That(items).IsNotEmpty("    ");
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE_ERROR);
         }
 
         #endregion IEnumerable IsNotEmpty

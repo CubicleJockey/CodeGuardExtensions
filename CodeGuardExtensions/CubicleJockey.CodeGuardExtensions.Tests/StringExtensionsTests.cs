@@ -17,16 +17,10 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const string SOMEMESSAGE = null;
             const string CUSTOMMESSAGE = "I be custom.";
 
-            try
-            {
-                Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected to get an exception.");
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
@@ -35,16 +29,10 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const string SOMEMESSAGE = "";
             const string CUSTOMMESSAGE = "I be custom.";
 
-            try
-            {
-                Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected to get an exception.");
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
@@ -53,43 +41,46 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             const string SOMEMESSAGE = "";
             const string CUSTOMMESSAGE = "I be custom.";
 
-            try
-            {
-                Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
-            }
-            catch (Exception x)
-            {
-                x.Message.Should().BeEquivalentTo(CUSTOMMESSAGE);
-                return;
-            }
-            Assert.Fail("Expected to get an exception.");
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage(CUSTOMMESSAGE);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IsNotNullOrWhiteSpace_CustomMessageIsNull()
         {
             const string SOMEMESSAGE = null;
             const string CUSTOMMESSAGE = null;
-            Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IsNotNullOrWhiteSpace_CustomMessageIsEmptyString()
         {
             const string SOMEMESSAGE = null;
             var CUSTOMMESSAGE = string.Empty;
-            Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException), "Cannot pass Null, Empty or Whitespace as message for IsNotNullOrWhiteSpace extension.")]
         public void IsNotNullOrWhiteSpace_CustomMessageIsWhitespace()
         {
             const string SOMEMESSAGE = null;
             const string CUSTOMMESSAGE = "     ";
-            Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            Action check = () => Guard.That(SOMEMESSAGE).IsNotNullOrWhiteSpace(CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                 .WithMessage("Cannot pass Null, Empty or Whitespace as customMessage for IsNotNullOrWhiteSpace extension.");
         }
 
         [TestMethod]
