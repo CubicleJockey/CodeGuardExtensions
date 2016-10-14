@@ -22,3 +22,12 @@ Version 1, December 2016
   0. You just DO WHAT THE FUCK YOU WANT TO.
 </pre>
 <hr />
+<br />
+
+#### Links
+
+[EyeCatch NuGetpacker](http://www.eyecatch.no/blog/create-nuget-packages-easily/)
+<br />
+[Markdown CheatSheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+<hr />
