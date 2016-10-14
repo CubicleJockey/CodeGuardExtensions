@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>CubicleJockey.CodeGuardExtensions.Packager</id>
+    <version>1.0.0</version>
+    <title>CubicleJockey.CodeGuardExtensions.Packager</title>
+    <authors>André Davis</authors>
+    <owners></owners>
+    <description>
+      This is a library of extensions for Code Guard. 
+      
+      NuGet Site: [https://www.nuget.org/packages/Seterlund.CodeGuard/]
+      NuGet Command: [Install-Package Seterlund.CodeGuard].
+      
+      These extensions are intended to give the guards custom messages.
+    </description>
+    <releaseNotes>
+    
+    </releaseNotes>
+    <summary>
+      These extensions are intended to give the guards custom messages.
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://nuget.org/packages/CubicleJockey.CodeGuardExtensions.Packager</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://www.wtfpl.net/about/</licenseUrl>
+    <copyright>Copyright  2016</copyright>
+    <dependencies>
+        <group targetFramework="net452">
+          <dependency id="Seterlund.CodeGuard" version="2.3.4" />
+        </group>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+    <file src="tools\" target="tools" />
+    <file src="content\" target="content" />
+  </files>
+</package>
