@@ -68,7 +68,9 @@
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="EnumerableTExtensionsTests.cs" />
     <Compile Include="IListExtensionsTests.cs" />
+    <Compile Include="IntExtensionsTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
+    <Compile Include="Play.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

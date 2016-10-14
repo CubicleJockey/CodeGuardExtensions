@@ -118,6 +118,13 @@ namespace CubicleJockey.CodeGuardExtensions
             return arg;
         }
 
+        /// <summary>
+        /// Check if item is Null or Default
+        /// </summary>
+        /// <typeparam name="T">Type of Object</typeparam>
+        /// <param name="arg">Self</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
         public static IArg<T> IsNullOrDefault<T>(this IArg<T> arg, string message)
         {
             InternalHelpers.IsCustomMessageValid(message, nameof(IsNullOrDefault));

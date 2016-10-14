@@ -8,6 +8,12 @@ namespace CubicleJockey.CodeGuardExtensions
 {
     public static class IListExtensions
     {
+        /// <summary>
+        /// Extension method that fills in the missing IList<T>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public static IArg<IList<T>> IsNotEmpty<T>(this IArg<IList<T>> arg)
         {
             try
