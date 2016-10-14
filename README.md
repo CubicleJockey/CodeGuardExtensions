@@ -10,7 +10,7 @@ Extensions Include:
 DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
 Version 1, December 2016 
 
- Copyright (C) 2016 Sam Hocevar <CubicleJockey@users.noreply.github.com> 
+ Copyright (C) 2016 André Davis <CubicleJockey@users.noreply.github.com> 
 
  Everyone is permitted to copy and distribute verbatim or modified 
  copies of this license document, and changing it is allowed as long 
