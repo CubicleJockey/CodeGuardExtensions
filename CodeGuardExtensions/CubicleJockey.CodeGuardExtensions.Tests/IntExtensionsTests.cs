@@ -468,5 +468,199 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         #endregion IsLessThan
+
+        #region IsEqual
+
+        [TestMethod]
+        public void IsEqual()
+        {
+            const int LHS = 5;
+            const int RHS = 5;
+
+            var result = Guard.That(LHS).IsEqual(RHS, "Should not see me.").Value;
+
+            result.ShouldBeEquivalentTo(LHS);
+        }
+
+        [TestMethod]
+        public void IsEqual_Failed()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+            const string CUSTOMMESSAGE = "Not Equal and stuff!";
+
+            Action check = () => Guard.That(LHS).IsEqual(RHS, CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsEqualCustomMessageIsNull()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsEqual(RHS, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+
+        [TestMethod]
+        public void IsEqualCustomMessageEmptyString()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsEqual(RHS, string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+
+
+        [TestMethod]
+        public void IsEqualCustomMessageIsWhitespace()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsEqual(RHS, "    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+        [TestMethod]
+        public void IsEqualByFunc()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => 5;
+
+            var result = Guard.That(LHS).IsEqual(rhsFunc, "Should not see me.").Value;
+
+            result.ShouldBeEquivalentTo(LHS);
+        }
+
+        [TestMethod]
+        public void IsEqualByFunc_Failed()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+            const string CUSTOMMESSAGE = "Not Equal and stuff!";
+
+            Action check = () => Guard.That(LHS).IsEqual(rhsFunc, CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsEqualByFuncCustomMessageIsNull()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsEqual(rhsFunc, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+
+        [TestMethod]
+        public void IsEqualByFuncCustomMessageEmptyString()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsEqual(rhsFunc, string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+
+
+        [TestMethod]
+        public void IsEqualByFuncCustomMessageIsWhitespace()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsEqual(rhsFunc, "    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
+        }
+
+        #endregion IsEqual
+
+        #region IsInRange
+
+        [TestMethod]
+        public void IsInRange()
+        {
+            const int VALUE = 12;
+            const int START = 10;
+            const int END = 14;
+
+            var result = Guard.That(VALUE).IsInRange(START, END, "Shouldn't see this.").Value;
+
+            result.ShouldBeEquivalentTo(VALUE);
+        }
+
+        [TestMethod]
+        public void IsInRange_Failed()
+        {
+            const int VALUE = 12;
+            const int START = 13;
+            const int END = 15;
+            const string CUSTOMMESSAGE = "Not in Range or something like that.";
+
+            Action check = () => Guard.That(VALUE).IsInRange(START, END, CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsInRangeCustomMessageIsNull()
+        {
+            const int VALUE = 12;
+            const int START = 13;
+            const int END = 15;
+
+            Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
+
+        [TestMethod]
+        public void IsInRangeCustomMessageIsEmptyString()
+        {
+            const int VALUE = 12;
+            const int START = 13;
+            const int END = 15;
+
+            Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
+
+        [TestMethod]
+        public void IsInRangeCustomMessageIsWhitespace()
+        {
+            const int VALUE = 12;
+            const int START = 10;
+            const int END = 14;
+
+            Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
+
+        #endregion IsInRange
     }
 }

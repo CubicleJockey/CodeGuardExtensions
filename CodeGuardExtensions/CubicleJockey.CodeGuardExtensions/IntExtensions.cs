@@ -171,5 +171,69 @@ namespace CubicleJockey.CodeGuardExtensions
             }
             return arg;
         }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsEqual
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Value to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsEqual(this IArg<int> arg, int param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsEqual));
+            try
+            {
+                Guard.That(arg.Value).IsEqual(param);
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsEqual
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Function to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsEqual(this IArg<int> arg, Func<int> param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsEqual));
+            try
+            {
+                Guard.That(arg.Value).IsEqual(param);
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsInRange
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="start">Starting Number of Range</param>
+        /// <param name="end">Ending Number of Range</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsInRange(this IArg<int> arg, int start, int end, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsInRange));
+            try
+            {
+                Guard.That(arg.Value).IsInRange(start, end);
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
     }
 }
