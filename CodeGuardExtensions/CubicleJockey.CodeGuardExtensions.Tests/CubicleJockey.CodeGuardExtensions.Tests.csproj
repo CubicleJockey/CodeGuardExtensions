@@ -67,6 +67,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="EnumerableTExtensionsTests.cs" />
+    <Compile Include="Helpers\Enums\TestFlags.cs" />
     <Compile Include="IListExtensionsTests.cs" />
     <Compile Include="IntExtensionsTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />

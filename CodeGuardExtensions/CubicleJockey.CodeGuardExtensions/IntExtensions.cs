@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
@@ -40,6 +41,131 @@ namespace CubicleJockey.CodeGuardExtensions
                 Guard.That(arg.Value).IsNegative();
             }
             catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsEven
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsEven(this IArg<int> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsEven));
+            try
+            {
+                Guard.That(arg.Value).IsEven();
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsOdd
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsOdd(this IArg<int> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsOdd));
+            try
+            {
+                Guard.That(arg.Value).IsOdd();
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsGreaterThan
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Value to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsGreaterThan(this IArg<int> arg, int param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsGreaterThan));
+            try
+            {
+                Guard.That(arg.Value).IsGreaterThan(param);
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsGreaterThan
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Function to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsGreaterThan(this IArg<int> arg, Func<int> param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsGreaterThan));
+            try
+            {
+                Guard.That(arg.Value).IsGreaterThan(param);
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsLessThan
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Value to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsLessThan(this IArg<int> arg, int param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsLessThan));
+            try
+            {
+                Guard.That(arg.Value).IsLessThan(param);
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsLessThan
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Action to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsLessThan(this IArg<int> arg, Func<int> param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsLessThan));
+            try
+            {
+                Guard.That(arg.Value).IsLessThan(param);
+            }
+            catch (Exception)
             {
                 arg.Message.Set(message);
             }
