@@ -789,5 +789,56 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         #endregion IsInRange
+
+        #region IsPrime
+
+        [TestMethod]
+        public void IsPrime()
+        {
+            const int PRIME = 13;
+            var result = Guard.That(PRIME).IsPrime("Shouldn't see this message").Value;
+
+            result.ShouldBeEquivalentTo(PRIME);
+        }
+
+        [TestMethod]
+        public void IsPrime_Failed()
+        {
+            const string EXPECTEDMESSAGE = "A special message or something.";
+
+            Action check = () => Guard.That(4).IsPrime(EXPECTEDMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(EXPECTEDMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsPrimeCustomMessageIsNull()
+        {
+            Action check = () => Guard.That(9).IsPrime(null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
+        }
+
+        [TestMethod]
+        public void IsPrimeCustomMessageIsEmptyString()
+        {
+            Action check = () => Guard.That(9).IsPrime(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
+        }
+
+        [TestMethod]
+        public void IsPrimeCustomMessageIsWhitespace()
+        {
+            Action check = () => Guard.That(9).IsPrime("  ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
+        }
+
+        #endregion IsPrime
     }
 }

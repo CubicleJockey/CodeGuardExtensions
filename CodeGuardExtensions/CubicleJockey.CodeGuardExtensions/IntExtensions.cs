@@ -277,5 +277,25 @@ namespace CubicleJockey.CodeGuardExtensions
             }
             return arg;
         }
+
+        /// <summary>
+        /// Extension method to add a Custome Message to IsPrime
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsPrime(this IArg<int> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsPrime));
+            try
+            {
+                Guard.That(arg.Value).IsPrime();
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
     }
 }
