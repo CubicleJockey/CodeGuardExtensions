@@ -215,6 +215,48 @@ namespace CubicleJockey.CodeGuardExtensions
         }
 
         /// <summary>
+        /// Extension method to add a Custom Message to IsNotEqual
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Value to compare</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsNotEqual(this IArg<int> arg, int param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotEqual));
+            try
+            {
+                Guard.That(arg.Value).IsNotEqual(param);
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsNotEqual
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="param">Action to compare against</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsNotEqual(this IArg<int> arg, Func<int> param, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotEqual));
+            try
+            {
+                Guard.That(arg.Value).IsNotEqual(param);
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
         /// Extension method to add a Custom Message to IsInRange
         /// </summary>
         /// <param name="arg">Self</param>

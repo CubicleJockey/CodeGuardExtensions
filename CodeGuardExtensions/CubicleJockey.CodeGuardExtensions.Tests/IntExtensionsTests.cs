@@ -531,6 +531,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
             check.ShouldThrow<ArgumentException>()
                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEqual"));
         }
+
         [TestMethod]
         public void IsEqualByFunc()
         {
@@ -593,6 +594,132 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         #endregion IsEqual
+
+        #region IsNotEqual
+
+        [TestMethod]
+        public void IsNotEqual()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            var result = Guard.That(LHS).IsNotEqual(RHS, "Should not see me.").Value;
+
+            result.ShouldBeEquivalentTo(LHS);
+        }
+
+        [TestMethod]
+        public void IsNotEqual_Failed()
+        {
+            const int LHS = 5;
+            const int RHS = 5;
+            const string CUSTOMMESSAGE = "Not Equal and stuff!";
+
+            Action check = () => Guard.That(LHS).IsNotEqual(RHS, CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsNotEqualCustomMessageIsNull()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(RHS, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+        [TestMethod]
+        public void IsNotEqualCustomMessageEmptyString()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(RHS, string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+
+        [TestMethod]
+        public void IsNotEqualCustomMessageIsWhitespace()
+        {
+            const int LHS = 5;
+            const int RHS = 6;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(RHS, "    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+        [TestMethod]
+        public void IsNotEqualByFunc()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => 6;
+
+            var result = Guard.That(LHS).IsNotEqual(rhsFunc, "Should not see me.").Value;
+
+            result.ShouldBeEquivalentTo(LHS);
+        }
+
+        [TestMethod]
+        public void IsNotEqualByFunc_Failed()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS;
+            const string CUSTOMMESSAGE = "Not Equal and stuff!";
+
+            Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, CUSTOMMESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(CUSTOMMESSAGE);
+        }
+
+        [TestMethod]
+        public void IsNotEqualByFuncCustomMessageIsNull()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+        [TestMethod]
+        public void IsNotEqualByFuncCustomMessageEmptyString()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+
+        [TestMethod]
+        public void IsNotEqualByFuncCustomMessageIsWhitespace()
+        {
+            const int LHS = 5;
+            Func<int> rhsFunc = () => LHS + 1;
+
+            Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, "    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEqual"));
+        }
+
+        #endregion IsNotEqual
 
         #region IsInRange
 
