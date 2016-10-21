@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Data;
 using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
 {
-    public static class IntExtensions
+    public static class Int32Extensions
     {
         /// <summary>
         /// Extensions method to add a Custom Message to IsPositive
@@ -290,6 +289,40 @@ namespace CubicleJockey.CodeGuardExtensions
             try
             {
                 Guard.That(arg.Value).IsPrime();
+            }
+            catch(Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add IsNotPrime
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsNotPrime(this IArg<int> arg)
+        {
+            if(InternalHelpers.IsPrime(arg.Value))
+            {
+                throw new ArgumentException("Value cannot be prime.");
+            }
+            return arg;
+        }
+
+        /// <summary>
+        /// Extension method to add a Custom Message to IsNotPrime
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="message">Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<int> IsNotPrime(this IArg<int> arg, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsNotPrime));
+            try
+            {
+                Guard.That(arg.Value).IsNotPrime();
             }
             catch(Exception)
             {

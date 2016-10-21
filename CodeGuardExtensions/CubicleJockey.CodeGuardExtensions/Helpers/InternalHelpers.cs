@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace CubicleJockey.CodeGuardExtensions.Helpers
 {
@@ -28,5 +30,63 @@ namespace CubicleJockey.CodeGuardExtensions.Helpers
         {
             return EqualityComparer<T>.Default.Equals(value, default(T));
         }
+
+
+        /// <summary>
+        /// Check if a integer value is Prime
+        /// </summary>
+        /// <typeparam name="T">An integer type.</typeparam>
+        /// <param name="value">Value to check for Primeness</param>
+        /// <returns>True if Prime, else False</returns>
+        public static bool IsPrime<T>(T value)
+        {
+            var validTypes = new[]
+            {
+                typeof(byte),
+                typeof(sbyte),
+                typeof(ushort),
+                typeof(short),
+                typeof(uint),
+                typeof(int),
+                typeof(ulong),
+                typeof(long)
+            };
+
+            if(!validTypes.Contains(typeof(T)))
+            {
+                throw new InternalHelperException($"{nameof(T)} cannot be checked for prime status as it is not an integer.");
+            }
+
+            long checkValue;
+
+            if(!long.TryParse(value.ToString(), out checkValue))
+            {
+                throw new InternalHelperException($"Failed to convert {nameof(T)} to a type of long.");
+            }
+
+            if (checkValue < 2)
+            {
+                return false;
+            }
+
+            var squareRootOfValue = (long)Math.Sqrt(checkValue);
+            for (var i = 2; i <= squareRootOfValue; i++)
+            {
+                // If remainder is 0, number is not prime
+                if (checkValue % i == 0)
+                {
+                    // return false
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    internal class InternalHelperException : Exception
+    {
+        public InternalHelperException(string message) : base(message) { }
+        public InternalHelperException(string message, Exception innerException) : base(message, innerException) { }
+        public InternalHelperException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }

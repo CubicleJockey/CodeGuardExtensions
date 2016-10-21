@@ -69,7 +69,9 @@
     <Compile Include="EnumerableTExtensionsTests.cs" />
     <Compile Include="Helpers\Enums\TestFlags.cs" />
     <Compile Include="IListExtensionsTests.cs" />
-    <Compile Include="IntExtensionsTests.cs" />
+    <Compile Include="Int16ExtensionsTests.cs" />
+    <Compile Include="Int32ExtensionsTests.cs" />
+    <Compile Include="Int64ExtensionsTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
     <Compile Include="Play.cs" />
     <Compile Include="StringExtensionsTests.cs" />
