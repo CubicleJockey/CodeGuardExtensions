@@ -4,19 +4,17 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Seterlund.CodeGuard;
 
-namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
+namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
 {
     [TestClass]
-    public class Int64ExtensionsTests : BaseTest
+    public class DoubleExtensionsTests : BaseTest
     {
-        private const long NEGATIVE = -1000000L;
-
         #region IsPositive
 
         [TestMethod]
         public void IsPositive()
         {
-            const long value = 1000000000;
+            const double value = 10;
 
             var result = Guard.That(value).IsPositive("Shouldn't get me.").Value;
 
@@ -29,7 +27,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         {
             const string MESSAGE = "Math Message";
 
-            Action check = () => Guard.That(NEGATIVE).IsPositive(MESSAGE);
+            Action check = () => Guard.That(-1.3).IsPositive(MESSAGE);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(MESSAGE);
@@ -38,7 +36,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsPositiveCustomMessageIsNull()
         {
-            Action check = () => Guard.That(NEGATIVE).IsPositive(null);
+            Action check = () => Guard.That(-1.3).IsPositive(null);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPositive"));
@@ -47,7 +45,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsPositiveCustomMessageIsEmptyString()
         {
-            Action check = () => Guard.That(NEGATIVE).IsPositive(string.Empty);
+            Action check = () => Guard.That(-1.3).IsPositive(string.Empty);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPositive"));
@@ -56,7 +54,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsPositiveCustomMessageIsWhitespace()
         {
-            Action check = () => Guard.That(NEGATIVE).IsPositive("      ");
+            Action check = () => Guard.That(-1.3).IsPositive("      ");
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPositive"));
@@ -69,7 +67,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNegative()
         {
-            const long value = -10;
+            const double value = -10;
 
             var result = Guard.That(value).IsNegative("Shouldn't get me.").Value;
 
@@ -82,7 +80,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         {
             const string MESSAGE = "Math Message";
 
-            Action check = () => Guard.That(1L).IsNegative(MESSAGE);
+            Action check = () => Guard.That(1.6).IsNegative(MESSAGE);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(MESSAGE);
@@ -91,7 +89,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNegativeCustomMessageIsNull()
         {
-            Action check = () => Guard.That(1L).IsNegative(null);
+            Action check = () => Guard.That(1.6).IsNegative(null);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNegative"));
@@ -100,7 +98,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNegativeCustomMessageIsEmptyString()
         {
-            Action check = () => Guard.That(1L).IsNegative(string.Empty);
+            Action check = () => Guard.That(1.6).IsNegative(string.Empty);
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNegative"));
@@ -109,7 +107,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNegativeCustomMessageIsWhitespace()
         {
-            Action check = () => Guard.That(1L).IsNegative("      ");
+            Action check = () => Guard.That(1.6).IsNegative("      ");
 
             check.ShouldThrow<ArgumentException>()
                  .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNegative"));
@@ -117,119 +115,13 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
 
         #endregion IsNegative
 
-        #region IsEven
-
-        [TestMethod]
-        public void IsEven()
-        {
-            const long value = 2;
-
-            var result = Guard.That(value).IsEven("Shouldn't get me.").Value;
-
-            (result % 2).ShouldBeEquivalentTo(0); //Even
-            result.ShouldBeEquivalentTo(value);
-        }
-
-        [TestMethod]
-        public void IsEven_Failed()
-        {
-            const string MESSAGE = "Math Message";
-
-            Action check = () => Guard.That(1L).IsEven(MESSAGE);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(MESSAGE);
-        }
-
-        [TestMethod]
-        public void IsEvenCustomMessageIsNull()
-        {
-            Action check = () => Guard.That(2L).IsEven(null);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEven"));
-        }
-
-        [TestMethod]
-        public void IsEvenCustomMessageIsEmptyString()
-        {
-            Action check = () => Guard.That(2L).IsEven(string.Empty);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEven"));
-        }
-
-        [TestMethod]
-        public void IsEvenCustomMessageIsWhitespace()
-        {
-            Action check = () => Guard.That(2L).IsEven("      ");
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsEven"));
-        }
-
-        #endregion IsEven
-
-        #region IsOdd
-
-        [TestMethod]
-        public void IsOdd()
-        {
-            const long value = 1;
-
-            var result = Guard.That(value).IsOdd("Shouldn't get me.").Value;
-
-            (result % 2).Should().BeGreaterThan(0); //Odd
-            result.ShouldBeEquivalentTo(value);
-        }
-
-        [TestMethod]
-        public void IsOdd_Failed()
-        {
-            const string MESSAGE = "Math Message";
-
-            Action check = () => Guard.That(2L).IsOdd(MESSAGE);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(MESSAGE);
-        }
-
-        [TestMethod]
-        public void IsOddCustomMessageIsNull()
-        {
-            Action check = () => Guard.That(1L).IsOdd(null);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsOdd"));
-        }
-
-        [TestMethod]
-        public void IsOddCustomMessageIsEmptyString()
-        {
-            Action check = () => Guard.That(1L).IsOdd(string.Empty);
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsOdd"));
-        }
-
-        [TestMethod]
-        public void IsOddCustomMessageIsWhitespace()
-        {
-            Action check = () => Guard.That(1L).IsOdd("      ");
-
-            check.ShouldThrow<ArgumentException>()
-                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsOdd"));
-        }
-
-        #endregion IsOdd
-
         #region IsGreatherThan
 
         [TestMethod]
         public void IsGreaterThan()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
 
             var result = Guard.That(LHS).IsGreaterThan(RHS, "Should not see me.").Value;
 
@@ -239,8 +131,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThan_Fail()
         {
-            const long RHS = 6;
-            const long LHS = 4;
+            const double RHS = 6.2;
+            const double LHS = 4.1;
             const string CUSTOMMESSAGE = "Why you no greater?";
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, CUSTOMMESSAGE);
@@ -252,8 +144,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanCustomMessageIsNull()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, null);
 
@@ -264,8 +156,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanCustomMessageIsEmptyString()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, string.Empty);
 
@@ -276,8 +168,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanCustomMessageIsWhitespace()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, "   ");
 
@@ -288,8 +180,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanByFunc()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
 
             var result = Guard.That(LHS).IsGreaterThan(RHS, "Should not see me.").Value;
 
@@ -297,10 +189,10 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsGreaterThanByFunc_Failed()
+        public void IsGreaterThanByFunc_Fail()
         {
-            Func<long> rhsFunc = () => (4 + 6 + 20);
-            const long LHS = 4;
+            Func<double> rhsFunc = () => (4 + 6 + 20);
+            const double LHS = 4.1;
             const string CUSTOMMESSAGE = "Why you no greater?";
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, CUSTOMMESSAGE);
@@ -312,8 +204,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsNull()
         {
-            Func<long> rhsFunc = () => (-14L);
-            const long LHS = 6;
+            Func<double> rhsFunc = () => (-14);
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, null);
 
@@ -324,8 +216,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsEmptyString()
         {
-            Func<long> func = () => (-14L);
-            const long LHS = 6;
+            Func<double> func = () => (-14);
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(func, string.Empty);
 
@@ -336,8 +228,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsWhitespace()
         {
-            Func<long> rhsFunc = () => (-14L);
-            const long LHS = 6;
+            Func<double> rhsFunc = () => (-14);
+            const double LHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, "   ");
 
@@ -352,8 +244,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThan()
         {
-            const long RHS = 6;
-            const long LHS = 4;
+            const double RHS = 6.2;
+            const double LHS = 4.1;
 
             var result = Guard.That(LHS).IsLessThan(RHS, "Should not see me.").Value;
 
@@ -363,8 +255,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThan_Fail()
         {
-            const long RHS = 4;
-            const long LHS = 6;
+            const double RHS = 4.7;
+            const double LHS = 6.2;
             const string CUSTOMMESSAGE = "Why you no lesser?";
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, CUSTOMMESSAGE);
@@ -376,8 +268,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanCustomMessageIsNull()
         {
-            const long RHS = 6;
-            const long LHS = 4;
+            const double RHS = 6.2;
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, null);
 
@@ -388,8 +280,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanCustomMessageIsEmptyString()
         {
-            const long RHS = 6;
-            const long LHS = 4;
+            const double RHS = 6.2;
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, string.Empty);
 
@@ -400,8 +292,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanCustomMessageIsWhitespace()
         {
-            const long RHS = 6;
-            const long LHS = 4;
+            const double RHS = 6.2;
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, "   ");
 
@@ -412,8 +304,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanByFunc()
         {
-            Func<long> rhsFunc = () => (4 + 2);
-            const long LHS = 4;
+            Func<double> rhsFunc = () => (4 + 2);
+            const double LHS = 4.1;
 
             var result = Guard.That(LHS).IsLessThan(rhsFunc, "Should not see me.").Value;
 
@@ -423,8 +315,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanByFunc_Fail()
         {
-            Func<long> rhsFunc = () => (4);
-            const long LHS = 6;
+            Func<double> rhsFunc = () => (4);
+            const double LHS = 6.2;
             const string CUSTOMMESSAGE = "Why you no lesser?";
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, CUSTOMMESSAGE);
@@ -436,8 +328,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsNull()
         {
-            Func<long> rhsFunc = () => (4L + 5L);
-            const long LHS = 4;
+            Func<double> rhsFunc = () => (4 + 5);
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, null);
 
@@ -448,8 +340,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsEmptyString()
         {
-            Func<long> rhsFunc = () => (4L + 5L);
-            const long LHS = 4;
+            Func<double> rhsFunc = () => (4 + 5);
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, string.Empty);
 
@@ -460,8 +352,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsWhitespace()
         {
-            Func<long> rhsFunc = () => (4L + 5L);
-            const long LHS = 4;
+            Func<double> rhsFunc = () => (4 + 5);
+            const double LHS = 4.1;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, "   ");
 
@@ -476,8 +368,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqual()
         {
-            const long LHS = 5;
-            const long RHS = 5;
+            const double LHS = 5;
+            const double RHS = 5;
 
             var result = Guard.That(LHS).IsEqual(RHS, "Should not see me.").Value;
 
@@ -487,8 +379,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqual_Failed()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, CUSTOMMESSAGE);
@@ -500,8 +392,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualCustomMessageIsNull()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, null);
 
@@ -512,8 +404,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualCustomMessageEmptyString()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, string.Empty);
 
@@ -525,8 +417,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualCustomMessageIsWhitespace()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, "    ");
 
@@ -537,8 +429,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualByFunc()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => 5;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => 5;
 
             var result = Guard.That(LHS).IsEqual(rhsFunc, "Should not see me.").Value;
 
@@ -548,8 +440,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualByFunc_Failed()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, CUSTOMMESSAGE);
@@ -561,8 +453,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualByFuncCustomMessageIsNull()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, null);
 
@@ -573,8 +465,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualByFuncCustomMessageEmptyString()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, string.Empty);
 
@@ -586,8 +478,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsEqualByFuncCustomMessageIsWhitespace()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, "    ");
 
@@ -602,8 +494,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqual()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             var result = Guard.That(LHS).IsNotEqual(RHS, "Should not see me.").Value;
 
@@ -613,8 +505,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqual_Failed()
         {
-            const long LHS = 5;
-            const long RHS = 5;
+            const double LHS = 5;
+            const double RHS = 5;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, CUSTOMMESSAGE);
@@ -626,8 +518,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualCustomMessageIsNull()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, null);
 
@@ -638,8 +530,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualCustomMessageEmptyString()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, string.Empty);
 
@@ -651,8 +543,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualCustomMessageIsWhitespace()
         {
-            const long LHS = 5;
-            const long RHS = 6;
+            const double LHS = 5;
+            const double RHS = 6.2;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, "    ");
 
@@ -663,8 +555,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualByFunc()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => 6;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => 6;
 
             var result = Guard.That(LHS).IsNotEqual(rhsFunc, "Should not see me.").Value;
 
@@ -674,8 +566,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualByFunc_Failed()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, CUSTOMMESSAGE);
@@ -687,8 +579,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageIsNull()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, null);
 
@@ -699,8 +591,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageEmptyString()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, string.Empty);
 
@@ -712,8 +604,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageIsWhitespace()
         {
-            const long LHS = 5;
-            Func<long> rhsFunc = () => LHS + 1;
+            const double LHS = 5;
+            Func<double> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, "    ");
 
@@ -728,9 +620,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsInRange()
         {
-            const long VALUE = 12;
-            const long START = 10;
-            const long END = 14;
+            const double VALUE = 12;
+            const double START = 10;
+            const double END = 14;
 
             var result = Guard.That(VALUE).IsInRange(START, END, "Shouldn't see this.").Value;
 
@@ -740,9 +632,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsInRange_Failed()
         {
-            const long VALUE = 12;
-            const long START = 13;
-            const long END = 15;
+            const double VALUE = 12;
+            const double START = 13;
+            const double END = 15;
             const string CUSTOMMESSAGE = "Not in Range or something like that.";
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, CUSTOMMESSAGE);
@@ -754,9 +646,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsInRangeCustomMessageIsNull()
         {
-            const long VALUE = 12;
-            const long START = 13;
-            const long END = 15;
+            const double VALUE = 12;
+            const double START = 13;
+            const double END = 15;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -767,9 +659,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsInRangeCustomMessageIsEmptyString()
         {
-            const long VALUE = 12;
-            const long START = 13;
-            const long END = 15;
+            const double VALUE = 12;
+            const double START = 13;
+            const double END = 15;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -780,9 +672,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         [TestMethod]
         public void IsInRangeCustomMessageIsWhitespace()
         {
-            const long VALUE = 12;
-            const long START = 10;
-            const long END = 14;
+            const double VALUE = 12;
+            const double START = 10;
+            const double END = 14;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -791,124 +683,5 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         #endregion IsInRange
-
-        #region IsPrime
-
-        [TestMethod]
-        public void IsPrime()
-        {
-            const long PRIME = 13;
-            var result = Guard.That(PRIME).IsPrime("Shouldn't see this message").Value;
-
-            result.ShouldBeEquivalentTo(PRIME);
-        }
-
-        [TestMethod]
-        public void IsPrime_Failed()
-        {
-            const string EXPECTEDMESSAGE = "A special message or something.";
-
-            Action check = () => Guard.That(4).IsPrime(EXPECTEDMESSAGE);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(EXPECTEDMESSAGE);
-        }
-
-        [TestMethod]
-        public void IsPrimeCustomMessageIsNull()
-        {
-            Action check = () => Guard.That(9).IsPrime(null);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
-        }
-
-        [TestMethod]
-        public void IsPrimeCustomMessageIsEmptyString()
-        {
-            Action check = () => Guard.That(9).IsPrime(string.Empty);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
-        }
-
-        [TestMethod]
-        public void IsPrimeCustomMessageIsWhitespace()
-        {
-            Action check = () => Guard.That(9).IsPrime("  ");
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsPrime"));
-        }
-
-        #endregion IsPrime
-
-        #region IsNotPrime
-
-        [TestMethod]
-        public void IsNotPrime()
-        {
-            const long NOTPRIME = 55;
-            var result = Guard.That(NOTPRIME).IsNotPrime().Value;
-
-            result.ShouldBeEquivalentTo(NOTPRIME);
-        }
-
-        [TestMethod]
-        public void IsNotPrime_Failed()
-        {
-            Action check = () => Guard.That(3).IsNotPrime();
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage("Value cannot be prime.");
-        }
-
-        [TestMethod]
-        public void IsNotPrimeCustomMessage()
-        {
-            const long NOTPRIME = 55;
-            var result = Guard.That(NOTPRIME).IsNotPrime("Should not see this message!").Value;
-
-            result.ShouldBeEquivalentTo(NOTPRIME);
-        }
-
-        [TestMethod]
-        public void IsNotPrimeCustomMessage_Failed()
-        {
-            const string EXPECTEDMESSAGE = "Special sauce.";
-            Action check = () => Guard.That(3L).IsNotPrime(EXPECTEDMESSAGE);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(EXPECTEDMESSAGE);
-        }
-
-        [TestMethod]
-        public void IsNotPrimeCustomMessageIsNull()
-        {
-            Action check = () => Guard.That(9L).IsNotPrime(null);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotPrime"));
-        }
-
-        [TestMethod]
-        public void IsNotPrimeCustomMessageIsEmptyString()
-        {
-            Action check = () => Guard.That(9L).IsNotPrime(string.Empty);
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotPrime"));
-        }
-
-        [TestMethod]
-        public void IsNotPrimeCustomMessageIsWhitespace()
-        {
-            Action check = () => Guard.That(9L).IsNotPrime("  ");
-
-            check.ShouldThrow<ArgumentException>()
-                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotPrime"));
-        }
-
-        #endregion IsNotPrime
     }
 }

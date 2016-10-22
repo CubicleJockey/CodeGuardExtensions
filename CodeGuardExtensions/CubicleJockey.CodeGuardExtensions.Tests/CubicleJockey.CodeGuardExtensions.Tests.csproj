@@ -65,6 +65,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="FloatingPoints\DoubleExtensionsTests.cs" />
     <Compile Include="Intergers\ByteExtensionsTests.cs" />
     <Compile Include="Collections\EnumerableExtensionsTests.cs" />
     <Compile Include="Collections\EnumerableTExtensionsTests.cs" />
