@@ -3,7 +3,7 @@ using CubicleJockey.CodeGuardExtensions.Helpers;
 using Seterlund.CodeGuard;
 
 namespace CubicleJockey.CodeGuardExtensions
-{
+{ 
     public static class StringExtensions
     {
         /// <summary>

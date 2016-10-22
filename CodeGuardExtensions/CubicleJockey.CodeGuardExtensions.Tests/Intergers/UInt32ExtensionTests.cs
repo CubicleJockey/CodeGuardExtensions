@@ -4,17 +4,17 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Seterlund.CodeGuard;
 
-namespace CubicleJockey.CodeGuardExtentions.Tests
+namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
 {
     [TestClass]
-    public class UInt64ExtensionsTests : BaseTest
+    public class UInt32ExtensionTests : BaseTest
     {
         #region IsEven
 
         [TestMethod]
         public void IsEven()
         {
-            const ulong value = 12;
+            const uint value = 12;
             var result = Guard.That(value).IsEven().Value;
 
             (result % 2).ShouldBeEquivalentTo(0); //Even
@@ -34,7 +34,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEvenCustomMessage()
         {
-            const ulong value = 2;
+            const uint value = 2;
 
             var result = Guard.That(value).IsEven("Shouldn't get me.").Value;
 
@@ -87,7 +87,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsOdd()
         {
-            const ulong value = 11;
+            const uint value = 11;
             var result = Guard.That(value).IsOdd().Value;
 
             (result % 2).Should().NotBe(0); //Odd
@@ -107,7 +107,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsOddCustomMessage()
         {
-            const ulong value = 1;
+            const uint value = 1;
 
             var result = Guard.That(value).IsOdd("Shouldn't get me.").Value;
 
@@ -160,8 +160,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThan()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
 
             var result = Guard.That(LHS).IsGreaterThan(RHS, "Should not see me.").Value;
 
@@ -171,8 +171,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThan_Fail()
         {
-            const ulong RHS = 6;
-            const ulong LHS = 4;
+            const uint RHS = 6;
+            const uint LHS = 4;
             const string CUSTOMMESSAGE = "Why you no greater?";
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, CUSTOMMESSAGE);
@@ -184,8 +184,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanCustomMessageIsNull()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, null);
 
@@ -196,8 +196,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanCustomMessageIsEmptyString()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, string.Empty);
 
@@ -208,8 +208,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanCustomMessageIsWhitespace()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(RHS, "   ");
 
@@ -220,8 +220,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanByFunc()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
 
             var result = Guard.That(LHS).IsGreaterThan(RHS, "Should not see me.").Value;
 
@@ -231,8 +231,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanByFunc_Fail()
         {
-            Func<ulong> rhsFunc = () => (4 + 6 + 20);
-            const ulong LHS = 4;
+            Func<uint> rhsFunc = () => (4 + 6 + 20);
+            const uint LHS = 4;
             const string CUSTOMMESSAGE = "Why you no greater?";
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, CUSTOMMESSAGE);
@@ -244,8 +244,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsNull()
         {
-            Func<ulong> rhsFunc = () => (4);
-            const ulong LHS = 6;
+            Func<uint> rhsFunc = () => (4u);
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, null);
 
@@ -256,8 +256,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsEmptyString()
         {
-            Func<ulong> func = () => (4);
-            const ulong LHS = 6;
+            Func<uint> func = () => (4u);
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(func, string.Empty);
 
@@ -268,8 +268,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsGreaterThanByFuncCustomMessageIsWhitespace()
         {
-            Func<ulong> rhsFunc = () => (4);
-            const ulong LHS = 6;
+            Func<uint> rhsFunc = () => (4u);
+            const uint LHS = 6;
 
             Action check = () => Guard.That(LHS).IsGreaterThan(rhsFunc, "   ");
 
@@ -284,8 +284,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThan()
         {
-            const ulong RHS = 6;
-            const ulong LHS = 4;
+            const uint RHS = 6;
+            const uint LHS = 4;
 
             var result = Guard.That(LHS).IsLessThan(RHS, "Should not see me.").Value;
 
@@ -295,8 +295,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThan_Fail()
         {
-            const ulong RHS = 4;
-            const ulong LHS = 6;
+            const uint RHS = 4;
+            const uint LHS = 6;
             const string CUSTOMMESSAGE = "Why you no lesser?";
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, CUSTOMMESSAGE);
@@ -308,8 +308,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanCustomMessageIsNull()
         {
-            const ulong RHS = 6;
-            const ulong LHS = 4;
+            const uint RHS = 6;
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, null);
 
@@ -320,8 +320,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanCustomMessageIsEmptyString()
         {
-            const ulong RHS = 6;
-            const ulong LHS = 4;
+            const uint RHS = 6;
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, string.Empty);
 
@@ -332,8 +332,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanCustomMessageIsWhitespace()
         {
-            const ulong RHS = 6;
-            const ulong LHS = 4;
+            const uint RHS = 6;
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(RHS, "   ");
 
@@ -344,8 +344,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanByFunc()
         {
-            Func<ulong> rhsFunc = () => (4 + 2);
-            const ulong LHS = 4;
+            Func<uint> rhsFunc = () => (4 + 2);
+            const uint LHS = 4;
 
             var result = Guard.That(LHS).IsLessThan(rhsFunc, "Should not see me.").Value;
 
@@ -355,8 +355,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanByFunc_Fail()
         {
-            Func<ulong> rhsFunc = () => (4);
-            const ulong LHS = 6;
+            Func<uint> rhsFunc = () => (4);
+            const uint LHS = 6;
             const string CUSTOMMESSAGE = "Why you no lesser?";
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, CUSTOMMESSAGE);
@@ -368,8 +368,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsNull()
         {
-            Func<ulong> rhsFunc = () => (4 + 5);
-            const ulong LHS = 4;
+            Func<uint> rhsFunc = () => (4 + 5);
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, null);
 
@@ -380,8 +380,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsEmptyString()
         {
-            Func<ulong> rhsFunc = () => (4 + 5);
-            const ulong LHS = 4;
+            Func<uint> rhsFunc = () => (4 + 5);
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, string.Empty);
 
@@ -392,8 +392,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsLessThanByFuncCustomMessageIsWhitespace()
         {
-            Func<ulong> rhsFunc = () => (4 + 5);
-            const ulong LHS = 4;
+            Func<uint> rhsFunc = () => (4 + 5);
+            const uint LHS = 4;
 
             Action check = () => Guard.That(LHS).IsLessThan(rhsFunc, "   ");
 
@@ -408,8 +408,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqual()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 5;
+            const uint LHS = 5;
+            const uint RHS = 5;
 
             var result = Guard.That(LHS).IsEqual(RHS, "Should not see me.").Value;
 
@@ -419,8 +419,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqual_Failed()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, CUSTOMMESSAGE);
@@ -432,8 +432,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualCustomMessageIsNull()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, null);
 
@@ -444,8 +444,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualCustomMessageEmptyString()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, string.Empty);
 
@@ -457,8 +457,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualCustomMessageIsWhitespace()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsEqual(RHS, "    ");
 
@@ -469,8 +469,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualByFunc()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => 5;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => 5;
 
             var result = Guard.That(LHS).IsEqual(rhsFunc, "Should not see me.").Value;
 
@@ -480,8 +480,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualByFunc_Failed()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, CUSTOMMESSAGE);
@@ -493,8 +493,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualByFuncCustomMessageIsNull()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, null);
 
@@ -505,8 +505,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualByFuncCustomMessageEmptyString()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, string.Empty);
 
@@ -518,8 +518,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsEqualByFuncCustomMessageIsWhitespace()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsEqual(rhsFunc, "    ");
 
@@ -534,8 +534,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqual()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             var result = Guard.That(LHS).IsNotEqual(RHS, "Should not see me.").Value;
 
@@ -545,8 +545,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqual_Failed()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 5;
+            const uint LHS = 5;
+            const uint RHS = 5;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, CUSTOMMESSAGE);
@@ -558,8 +558,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualCustomMessageIsNull()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, null);
 
@@ -570,8 +570,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualCustomMessageEmptyString()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, string.Empty);
 
@@ -583,8 +583,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualCustomMessageIsWhitespace()
         {
-            const ulong LHS = 5;
-            const ulong RHS = 6;
+            const uint LHS = 5;
+            const uint RHS = 6;
 
             Action check = () => Guard.That(LHS).IsNotEqual(RHS, "    ");
 
@@ -595,8 +595,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualByFunc()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => 6;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => 6;
 
             var result = Guard.That(LHS).IsNotEqual(rhsFunc, "Should not see me.").Value;
 
@@ -606,8 +606,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualByFunc_Failed()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS;
             const string CUSTOMMESSAGE = "Not Equal and stuff!";
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, CUSTOMMESSAGE);
@@ -619,8 +619,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageIsNull()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, null);
 
@@ -631,8 +631,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageEmptyString()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, string.Empty);
 
@@ -644,8 +644,8 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotEqualByFuncCustomMessageIsWhitespace()
         {
-            const ulong LHS = 5;
-            Func<ulong> rhsFunc = () => LHS + 1;
+            const uint LHS = 5;
+            Func<uint> rhsFunc = () => LHS + 1;
 
             Action check = () => Guard.That(LHS).IsNotEqual(rhsFunc, "    ");
 
@@ -660,9 +660,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsInRange()
         {
-            const ulong VALUE = 12;
-            const ulong START = 10;
-            const ulong END = 14;
+            const uint VALUE = 12;
+            const uint START = 10;
+            const uint END = 14;
 
             var result = Guard.That(VALUE).IsInRange(START, END, "Shouldn't see this.").Value;
 
@@ -672,9 +672,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsInRange_Failed()
         {
-            const ulong VALUE = 12;
-            const ulong START = 13;
-            const ulong END = 15;
+            const uint VALUE = 12;
+            const uint START = 13;
+            const uint END = 15;
             const string CUSTOMMESSAGE = "Not in Range or something like that.";
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, CUSTOMMESSAGE);
@@ -686,9 +686,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsInRangeCustomMessageIsNull()
         {
-            const ulong VALUE = 12;
-            const ulong START = 13;
-            const ulong END = 15;
+            const uint VALUE = 12;
+            const uint START = 13;
+            const uint END = 15;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -699,9 +699,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsInRangeCustomMessageIsEmptyString()
         {
-            const ulong VALUE = 12;
-            const ulong START = 13;
-            const ulong END = 15;
+            const uint VALUE = 12;
+            const uint START = 13;
+            const uint END = 15;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -712,9 +712,9 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsInRangeCustomMessageIsWhitespace()
         {
-            const ulong VALUE = 12;
-            const ulong START = 10;
-            const ulong END = 14;
+            const uint VALUE = 12;
+            const uint START = 10;
+            const uint END = 14;
 
             Action check = () => Guard.That(VALUE).IsInRange(START, END, null);
 
@@ -729,7 +729,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsPrime()
         {
-            const ulong PRIME = 839;
+            const uint PRIME = 839;
             var result = Guard.That(PRIME).IsPrime().Value;
 
             result.ShouldBeEquivalentTo(PRIME);
@@ -746,7 +746,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsPrimeCustomMessage()
         {
-            const ulong PRIME = 13;
+            const uint PRIME = 13;
             var result = Guard.That(PRIME).IsPrime("Shouldn't see this message").Value;
 
             result.ShouldBeEquivalentTo(PRIME);
@@ -797,7 +797,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotPrime()
         {
-            const ulong NOTPRIME = 55;
+            const uint NOTPRIME = 55;
             var result = Guard.That(NOTPRIME).IsNotPrime().Value;
 
             result.ShouldBeEquivalentTo(NOTPRIME);
@@ -815,7 +815,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         [TestMethod]
         public void IsNotPrimeCustomMessage()
         {
-            const ulong NOTPRIME = 55;
+            const uint NOTPRIME = 55;
             var result = Guard.That(NOTPRIME).IsNotPrime("Should not see this message!").Value;
 
             result.ShouldBeEquivalentTo(NOTPRIME);

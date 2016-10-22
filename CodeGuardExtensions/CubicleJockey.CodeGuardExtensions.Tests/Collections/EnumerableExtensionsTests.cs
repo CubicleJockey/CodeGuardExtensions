@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Seterlund.CodeGuard;
 
-namespace CubicleJockey.CodeGuardExtentions.Tests
+namespace CubicleJockey.CodeGuardExtentions.Tests.Collections
 {
     [TestClass]
     public class EnumerableExtensionsTests : BaseTest

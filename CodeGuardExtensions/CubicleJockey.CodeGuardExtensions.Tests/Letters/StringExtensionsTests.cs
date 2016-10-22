@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using CubicleJockey.CodeGuardExtensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Seterlund.CodeGuard;
 
-namespace CubicleJockey.CodeGuardExtentions.Tests
+namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
 {
     [TestClass]
     public class StringExtensionsTests : BaseTest

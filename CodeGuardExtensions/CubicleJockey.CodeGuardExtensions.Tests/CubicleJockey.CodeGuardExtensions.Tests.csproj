@@ -65,22 +65,21 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
-    <Compile Include="ByteExtensionsTests.cs" />
-    <Compile Include="EnumerableExtensionsTests.cs" />
-    <Compile Include="EnumerableTExtensionsTests.cs" />
+    <Compile Include="Intergers\ByteExtensionsTests.cs" />
+    <Compile Include="Collections\EnumerableExtensionsTests.cs" />
+    <Compile Include="Collections\EnumerableTExtensionsTests.cs" />
     <Compile Include="Helpers\Enums\TestFlags.cs" />
-    <Compile Include="IListExtensionsTests.cs" />
-    <Compile Include="Int16ExtensionsTests.cs" />
-    <Compile Include="Int32ExtensionsTests.cs" />
-    <Compile Include="Int64ExtensionsTests.cs" />
+    <Compile Include="Collections\IListExtensionsTests.cs" />
+    <Compile Include="Intergers\Int16ExtensionsTests.cs" />
+    <Compile Include="Intergers\Int32ExtensionsTests.cs" />
+    <Compile Include="Intergers\Int64ExtensionsTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
-    <Compile Include="Play.cs" />
-    <Compile Include="SByteExtensionsTests.cs" />
-    <Compile Include="StringExtensionsTests.cs" />
+    <Compile Include="Intergers\SByteExtensionsTests.cs" />
+    <Compile Include="Letters\StringExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UInt16ExtensionsTests.cs" />
-    <Compile Include="UInt32ExtensionTests.cs" />
-    <Compile Include="UInt64ExtensionsTests.cs" />
+    <Compile Include="Intergers\UInt16ExtensionsTests.cs" />
+    <Compile Include="Intergers\UInt32ExtensionTests.cs" />
+    <Compile Include="Intergers\UInt64ExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,6 +90,7 @@
       <Name>CubicleJockey.CodeGuardExtensions</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
