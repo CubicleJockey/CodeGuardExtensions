@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FloatingPoints\DoubleExtensions.cs" />
+    <Compile Include="FloatingPoints\FloatExtensions.cs" />
     <Compile Include="Integers\ByteExtensions.cs" />
     <Compile Include="Collections\EnumerableExtensions.cs" />
     <Compile Include="Collections\EnumerableTExtensions.cs" />
