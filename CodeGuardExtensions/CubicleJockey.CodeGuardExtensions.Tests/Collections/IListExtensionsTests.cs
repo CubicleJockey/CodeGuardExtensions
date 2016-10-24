@@ -145,7 +145,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Collections
         }
 
         [TestMethod]
-        public void IsNotEmpty_Failed()
+        public void IsNotEmptyFailed()
         {
             IList<float> list = new float[0];
 
@@ -170,7 +170,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Collections
         }
 
         [TestMethod]
-        public void IsNotEmptyCustomMessage_Failed()
+        public void IsNotEmptyCustomMessageFailed()
         {
             const string CUSTOMMESSAGE = "Eldritch";
             IList<int> list = new int[0];

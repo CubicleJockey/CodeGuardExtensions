@@ -49,7 +49,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Collections
         }
 
         [TestMethod]
-        public void IsEmpytCustomMessage_Failed()
+        public void IsEmpytCustomMessageFailed()
         {
             const string CUSTOMMESSAGE = "MTG";
 

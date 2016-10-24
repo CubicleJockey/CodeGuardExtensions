@@ -22,7 +22,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEven_Failed()
+        public void IsEvenFailed()
         {
             const string MESSAGE = "Math Message";
             Action check = () => Guard.That(1u).IsEven(MESSAGE);
@@ -43,7 +43,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEvenMessage_Failed()
+        public void IsEvenMessageFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -95,7 +95,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsOdd_Failed()
+        public void IsOddFailed()
         {
             const string MESSAGE = "Math Message";
             Action check = () => Guard.That(2u).IsOdd(MESSAGE);
@@ -116,7 +116,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsOddCustoMessage_Failed()
+        public void IsOddCustoMessageFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -417,7 +417,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEqual_Failed()
+        public void IsEqualFailed()
         {
             const ushort LHS = 5;
             const ushort RHS = 6;
@@ -478,7 +478,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEqualByFunc_Failed()
+        public void IsEqualByFuncFailed()
         {
             const ushort LHS = 5;
             Func<ushort> rhsFunc = () => LHS + 1;
@@ -543,7 +543,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotEqual_Failed()
+        public void IsNotEqualFailed()
         {
             const ushort LHS = 5;
             const ushort RHS = 5;
@@ -604,7 +604,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotEqualByFunc_Failed()
+        public void IsNotEqualByFuncFailed()
         {
             const ushort LHS = 5;
             Func<ushort> rhsFunc = () => LHS;
@@ -670,7 +670,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsInRange_Failed()
+        public void IsInRangeFailed()
         {
             const ushort VALUE = 12;
             const ushort START = 13;
@@ -736,7 +736,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsPrime_Failed()
+        public void IsPrimeFailed()
         {
             Action check = () => Guard.That(4u).IsPrime();
             check.ShouldThrow<ArgumentException>()
@@ -753,7 +753,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsPrimeMessage_Failed()
+        public void IsPrimeMessageFailed()
         {
             const string EXPECTEDMESSAGE = "A special message or something.";
 
@@ -804,7 +804,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotPrime_Failed()
+        public void IsNotPrimeFailed()
         {
             Action check = () => Guard.That(3).IsNotPrime();
 
@@ -822,7 +822,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotPrimeCustomMessage_Failed()
+        public void IsNotPrimeCustomMessageFailed()
         {
             const string EXPECTEDMESSAGE = "Special sauce.";
             Action check = () => Guard.That(3u).IsNotPrime(EXPECTEDMESSAGE);

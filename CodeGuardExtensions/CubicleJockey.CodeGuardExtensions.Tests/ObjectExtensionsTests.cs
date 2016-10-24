@@ -155,7 +155,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         [TestMethod]
-        public void IsNotDefault_Failed()
+        public void IsNotDefaultFailed()
         {
             const string CUSTOMMESSAGE = "HansZimmer";
             const int number = default(int);
@@ -212,7 +212,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
         }
 
         [TestMethod]
-        public void IsDefault_Failed()
+        public void IsDefaultFailed()
         {
             const string CUSTOMMESSAGE = "ToeJam and Earl";
             const int number = 42;

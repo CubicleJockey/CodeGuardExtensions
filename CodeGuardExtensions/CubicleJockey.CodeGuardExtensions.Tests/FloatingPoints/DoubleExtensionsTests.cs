@@ -23,7 +23,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsPositive_Failed()
+        public void IsPositiveFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -76,7 +76,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsNegative_Failed()
+        public void IsNegativeFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -377,7 +377,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsEqual_Failed()
+        public void IsEqualFailed()
         {
             const double LHS = 5;
             const double RHS = 6.2;
@@ -438,7 +438,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsEqualByFunc_Failed()
+        public void IsEqualByFuncFailed()
         {
             const double LHS = 5;
             Func<double> rhsFunc = () => LHS + 1;
@@ -503,7 +503,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsNotEqual_Failed()
+        public void IsNotEqualFailed()
         {
             const double LHS = 5;
             const double RHS = 5;
@@ -564,7 +564,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsNotEqualByFunc_Failed()
+        public void IsNotEqualByFuncFailed()
         {
             const double LHS = 5;
             Func<double> rhsFunc = () => LHS;
@@ -630,7 +630,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.FloatingPoints
         }
 
         [TestMethod]
-        public void IsInRange_Failed()
+        public void IsInRangeFailed()
         {
             const double VALUE = 12;
             const double START = 13;

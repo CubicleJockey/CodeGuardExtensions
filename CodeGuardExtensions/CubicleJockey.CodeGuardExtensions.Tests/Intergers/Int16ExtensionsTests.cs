@@ -22,7 +22,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsPositive_Failed()
+        public void IsPositiveFailed()
         {
             Action check = () => Guard.That((short)-1).IsPositive();
 
@@ -42,7 +42,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsPositiveCustomMessage_Failed()
+        public void IsPositiveCustomMessageFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -95,7 +95,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNegative_Failed()
+        public void IsNegativeFailed()
         {
             Action check = () => Guard.That((short)1).IsNegative();
 
@@ -116,7 +116,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNegativeCustomMessage_Failed()
+        public void IsNegativeCustomMessageFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -169,7 +169,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEven_Failed()
+        public void IsEvenFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -222,7 +222,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsOdd_Failed()
+        public void IsOddFailed()
         {
             Action check = () => Guard.That((short)2).IsOdd();
 
@@ -242,7 +242,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsOddCustomMessage_Failed()
+        public void IsOddCustomMessageFailed()
         {
             const string MESSAGE = "Math Message";
 
@@ -543,7 +543,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEqual_Failed()
+        public void IsEqualFailed()
         {
             const short LHS = 5;
             const short RHS = 6;
@@ -604,7 +604,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsEqualByFunc_Failed()
+        public void IsEqualByFuncFailed()
         {
             const short LHS = 5;
             Func<short> rhsFunc = () => LHS + 1;
@@ -669,7 +669,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotEqual_Failed()
+        public void IsNotEqualFailed()
         {
             const short LHS = 5;
             const short RHS = 5;
@@ -730,7 +730,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotEqualByFunc_Failed()
+        public void IsNotEqualByFuncFailed()
         {
             const short LHS = 5;
             Func<short> rhsFunc = () => LHS;
@@ -796,7 +796,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsInRange_Failed()
+        public void IsInRangeFailed()
         {
             const short VALUE = 12;
             const short START = 13;
@@ -862,7 +862,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsPrime_Failed()
+        public void IsPrimeFailed()
         {
             const string EXPECTEDMESSAGE = "A special message or something.";
 
@@ -913,7 +913,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotPrime_Failed()
+        public void IsNotPrimeFailed()
         {
             Action check = () => Guard.That((short)3).IsNotPrime();
 
@@ -931,7 +931,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Intergers
         }
 
         [TestMethod]
-        public void IsNotPrimeCustomMessage_Failed()
+        public void IsNotPrimeCustomMessageFailed()
         {
             const string EXPECTEDMESSAGE = "Special sauce.";
             Action check = () => Guard.That((short)3).IsNotPrime(EXPECTEDMESSAGE);

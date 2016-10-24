@@ -97,6 +97,56 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
 
         #endregion IsNotNullOrWhiteSpace
 
+        #region IsNotEmpty
+
+        [TestMethod]
+        public void IsNotEmpty()
+        {
+            const string value = "The Value";
+            var result = Guard.That(value).IsNotEmpty("Should not see me!.").Value;
+
+            result.Should().BeEquivalentTo(value);
+        }
+
+        [TestMethod]
+        public void IsNotEmptyFailed()
+        {
+            const string MESSAGE = "Failure and such.";
+            Action check = () => Guard.That(string.Empty).IsNotEmpty(MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomMessageIsNull()
+        {
+            Action check = () => Guard.That("Something").IsNotEmpty(null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomMessageIsEmptyString()
+        {
+            Action check = () => Guard.That("Something").IsNotEmpty(string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+        [TestMethod]
+        public void IsNotEmptyCustomMessageIsWhitespace()
+        {
+            Action check = () => Guard.That("Something").IsNotEmpty("      ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotEmpty"));
+        }
+
+        #endregion IsNotEmpty
+
         #region Contains
 
         [TestMethod]
@@ -110,7 +160,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
         }
 
         [TestMethod]
-        public void ContainsCustomeMessage_Failed()
+        public void ContainsCustomeMessageFailed()
         {
             const string MESSAGE = "Dat message and all.";
             const string MAIN = "I am a string.";
@@ -150,5 +200,115 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
         }
 
         #endregion Contains
+
+        #region EndsWith
+
+        [TestMethod]
+        public void EndsWith()
+        {
+            const string value = "Blood Oil";
+            var result = Guard.That(value).EndsWith("Oil", "Should not get me.").Value;
+
+            result.Should().BeEquivalentTo(value);
+        }
+
+        [TestMethod]
+        public void EndsWithFailed()
+        {
+            const string MESSAGE = "Breaking us! Killing us!";
+            Action check = () => Guard.That("Failed").EndsWith("Not This", MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void EndsWithCustomMessageIsNull()
+        {
+            Action check = () => Guard.That("Failed").EndsWith("Not This", null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("EndsWith"));
+        }
+
+        [TestMethod]
+        public void EndsWithCustomMessageIsEmptyString()
+        {
+            Action check = () => Guard.That("Failed").EndsWith("Not This", string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("EndsWith"));
+        }
+
+        [TestMethod]
+        public void EndsWithCustomMessageIsWhitespace()
+        {
+            Action check = () => Guard.That("Failed").EndsWith("Not This", "       ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("EndsWith"));
+        }
+
+        #endregion EndsWith
+
+        #region IsMatch
+
+        [TestMethod]
+        public void IsMatch()
+        {
+            const string PATTERN = "[0-9A-Z]";
+            const string VALUE = "ABC190";
+
+            var result = Guard.That(VALUE).IsMatch(PATTERN, "Shouldn't get me").Value;
+
+            result.Should().BeEquivalentTo(VALUE);
+        }
+
+        [TestMethod]
+        public void IsMatchFailed()
+        {
+            const string PATTERN = "[0-9A-Z]";
+            const string MESSAGE = "Get this message!!!!";
+
+            Action check = () => Guard.That("lowercasefail").IsMatch(PATTERN, MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void IsMatchCustomMessageIsNull()
+        {
+            const string PATTERN = "[0-9A-Z]";
+            
+            Action check = () => Guard.That("lowercasefail").IsMatch(PATTERN, null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsMatch"));
+        }
+
+        [TestMethod]
+        public void IsMatchCustomMessageIsEmptyString()
+        {
+            const string PATTERN = "[0-9A-Z]";
+
+            Action check = () => Guard.That("lowercasefail").IsMatch(PATTERN, string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsMatch"));
+        }
+
+        [TestMethod]
+        public void IsMatchCustomMessageIsWhihtespace()
+        {
+            const string PATTERN = "[0-9A-Z]";
+
+            Action check = () => Guard.That("lowercasefail").IsMatch(PATTERN, "       ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsMatch"));
+        }
+
+        #endregion IsMatch
     }
 }
