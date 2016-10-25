@@ -393,5 +393,54 @@ namespace CubicleJockey.CodeGuardExtentions.Tests
                 .WithMessage(ExpectedCustomeInvalidErrorMessage("IsNotNullOrDefault"));
         }
         #endregion IsNotNullOrDefault
+
+        #region Is
+
+        [TestMethod]
+        public void IsCustomMessage()
+        {
+            var result = Guard.That(long.MaxValue).Is(typeof(long), "Should not see me.").Value;
+
+            result.ShouldBeEquivalentTo(long.MaxValue);
+        }
+
+        [TestMethod]
+        public void IsCustomMessageFailed()
+        {
+            const string MESSAGE = "Wrong type dawg!";
+            Action check = () => Guard.That(char.MaxValue).Is(typeof(string), MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void IsCustomMessageIsNull()
+        {
+            Action check = () => Guard.That(char.MaxValue).Is(typeof(string), null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("Is"));
+        }
+
+        [TestMethod]
+        public void IsCustomMessageIsEmptyString()
+        {
+            Action check = () => Guard.That(char.MaxValue).Is(typeof(string), string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("Is"));
+        }
+
+        [TestMethod]
+        public void IsCustomMessageIsWhitespace()
+        {
+            Action check = () => Guard.That(char.MaxValue).Is(typeof(string), "    ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("Is"));
+        }
+
+        #endregion Is
     }
 }
