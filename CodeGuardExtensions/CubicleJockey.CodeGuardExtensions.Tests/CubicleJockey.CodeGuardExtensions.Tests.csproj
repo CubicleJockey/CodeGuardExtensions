@@ -75,6 +75,7 @@
     <Compile Include="Intergers\Int16ExtensionsTests.cs" />
     <Compile Include="Intergers\Int32ExtensionsTests.cs" />
     <Compile Include="Intergers\Int64ExtensionsTests.cs" />
+    <Compile Include="Letters\CharExtensionsTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
     <Compile Include="Intergers\SByteExtensionsTests.cs" />
     <Compile Include="Letters\StringExtensionsTests.cs" />

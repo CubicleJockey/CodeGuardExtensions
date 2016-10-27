@@ -54,6 +54,7 @@
     <Compile Include="Integers\Int16Extensions.cs" />
     <Compile Include="Integers\Int32Extensions.cs" />
     <Compile Include="Integers\Int64Extensions.cs" />
+    <Compile Include="Letters\CharExtensions.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Integers\SByteExtensions.cs" />
     <Compile Include="Letters\StringExtensions.cs" />
