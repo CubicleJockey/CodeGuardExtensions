@@ -31,3 +31,7 @@ Version 1, September 2016
 [Markdown CheatSheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
 <hr />
+
+<a href="http://www.wtfpl.net/"><img
+       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
+       width="80" height="15" alt="WTFPL" /></a>
