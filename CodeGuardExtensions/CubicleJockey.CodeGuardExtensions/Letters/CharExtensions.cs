@@ -132,25 +132,26 @@ namespace CubicleJockey.CodeGuardExtensions
             return arg;
         }
 
-        ///// <summary>
-        ///// Extension method to IsLessThan which allows a custom message.
-        ///// </summary>
-        ///// <param name="arg">Self</param>
-        ///// <param name="param">Value to compare</param>
-        ///// <param name="message">The Custom Message</param>
-        ///// <returns>Self</returns>
-        //public static IArg<char> IsInRange(this IArg<char> arg, char start, char end, string message)
-        //{
-        //    InternalHelpers.IsCustomMessageValid(message, nameof(IsInRange));
-        //    try
-        //    {
-        //        Guard.That(arg.Value).IsInRange()
-        //    }
-        //    catch(Exception)
-        //    {
-        //        arg.Message.Set(message);
-        //    }
-        //    return arg;
-        //}
+        /// <summary>
+        /// Extension method to IsLessThan which allows a custom message.
+        /// </summary>
+        /// <param name="arg">Self</param>
+        /// <param name="start">Starting Character</param>
+        /// <param name="end">Ending Character</param>
+        /// <param name="message">The Custom Message</param>
+        /// <returns>Self</returns>
+        public static IArg<char> IsInRange(this IArg<char> arg, char start, char end, string message)
+        {
+            InternalHelpers.IsCustomMessageValid(message, nameof(IsInRange));
+            try
+            {
+                Guard.That(arg.Value).IsInRange(start, end);
+            }
+            catch (Exception)
+            {
+                arg.Message.Set(message);
+            }
+            return arg;
+        }
     }
 }

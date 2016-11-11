@@ -248,7 +248,7 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
         }
 
         [TestMethod]
-        public void IsLessThanustomMessageFailed()
+        public void IsLessThanCustomMessageFailed()
         {
             const string MESSAGE = "Characters can be less than, dafauc.";
 
@@ -362,7 +362,52 @@ namespace CubicleJockey.CodeGuardExtentions.Tests.Letters
 
         #region IsInRange
 
+        [TestMethod]
+        public void IsInRangeWithCustomMessage()
+        {
+            const char VALUE = 'f';
+            var result = Guard.That(VALUE).IsInRange('a', 'g', "Shouldn't see me").Value;
 
+            result.Should().NotBeNull();
+            result.ShouldBeEquivalentTo(VALUE);
+        }
+
+        [TestMethod]
+        public void IsInRangeWithCustomeMessageFailed()
+        {
+            const string MESSAGE = "Letters and stuff.";
+            Action check = () => Guard.That('c').IsInRange('d', 'e', MESSAGE);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(MESSAGE);
+        }
+
+        [TestMethod]
+        public void IsInRangeIsLessThanCustomMessageIsNull()
+        {
+            Action check = () => Guard.That('C').IsInRange('b', 'e', null);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
+
+        [TestMethod]
+        public void IsInRangeIsLessThanCustomMessageIsEmptyString()
+        {
+            Action check = () => Guard.That('C').IsInRange('b', 'e', string.Empty);
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
+
+        [TestMethod]
+        public void IsInRangeIsLessThanCustomMessageIsWhitespace()
+        {
+            Action check = () => Guard.That('C').IsInRange('b', 'e', "   ");
+
+            check.ShouldThrow<ArgumentException>()
+                .WithMessage(ExpectedCustomeInvalidErrorMessage("IsInRange"));
+        }
 
         #endregion IsInRange
     }
