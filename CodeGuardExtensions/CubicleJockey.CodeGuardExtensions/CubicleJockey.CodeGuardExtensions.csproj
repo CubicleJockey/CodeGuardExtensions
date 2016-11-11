@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoolExtensions.cs" />
     <Compile Include="FloatingPoints\DoubleExtensions.cs" />
     <Compile Include="FloatingPoints\FloatExtensions.cs" />
     <Compile Include="Integers\ByteExtensions.cs" />

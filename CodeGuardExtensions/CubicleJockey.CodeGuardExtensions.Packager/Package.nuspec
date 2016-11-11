@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package>
   <metadata>
-    <id>CubicleJockey.CodeGuardExtensions.Packager</id>
-    <version>1.0.0</version>
-    <title>CubicleJockey.CodeGuardExtensions.Packager</title>
+    <id>CubicleJockey.CodeGuardExtensions</id>
+    <version>1.0.1</version>
+    <title>CubicleJockey.CodeGuardExtensions</title>
     <authors>André Davis</authors>
     <owners></owners>
     <description>
@@ -21,7 +21,7 @@
       These extensions are intended to give the guards custom messages.
     </summary>
     <language>en-US</language>
-    <projectUrl>https://nuget.org/packages/CubicleJockey.CodeGuardExtensions.Packager</projectUrl>
+    <projectUrl>https://nuget.org/packages/CubicleJockey.CodeGuardExtensions</projectUrl>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>http://www.wtfpl.net/about/</licenseUrl>
