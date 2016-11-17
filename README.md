@@ -3,7 +3,7 @@
 <hr />
 
 Extensions Include:
-* Custom Messages for Guard Errors
+* Custom Messages extensions for [CodeGuard](https://www.nuget.org/packages/Seterlund.CodeGuard/)
 
 <hr />
 <pre>
