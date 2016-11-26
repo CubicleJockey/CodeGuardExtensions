@@ -24,6 +24,15 @@ Version 1, September 2016
 <hr />
 <br />
 
+
+#### Basic Examples
+
+<pre>
+Guard.That(false).IsFalse("I'm a custom message.");
+
+var result = Guard.That(collection).IsNotEmpty("What am I supposed to do with an empty collection.").Value;
+</pre>
+
 #### Links
 
 [EyeCatch NuGetpacker](http://www.eyecatch.no/blog/create-nuget-packages-easily/)
