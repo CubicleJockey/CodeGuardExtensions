@@ -27,11 +27,11 @@ Version 1, September 2016
 
 #### Basic Examples
 
-<pre>
+```csharp
 Guard.That(false).IsFalse("I'm a custom message.");
 
 var result = Guard.That(collection).IsNotEmpty("What am I supposed to do with an empty collection.").Value;
-</pre>
+```
 
 #### Links
 
