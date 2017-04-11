@@ -37,7 +37,7 @@ var result = Guard.That(collection).IsNotEmpty("What am I supposed to do with an
 
 [EyeCatch NuGetpacker](http://www.eyecatch.no/blog/create-nuget-packages-easily/)
 <br />
-[Markdown CheatSheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+[Markdown CheatSheet](https://guides.github.com/features/mastering-markdown/)
 
 <hr />
 
